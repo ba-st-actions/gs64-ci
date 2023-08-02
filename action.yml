@@ -18,3 +18,4 @@ runs:
     - ${{ inputs.project_name }}
     - ${{ inputs.load_spec }}
     - ${{ inputs.run_tests }}
+  post-entrypoint: '/post-action.sh'

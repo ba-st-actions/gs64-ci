@@ -24,13 +24,14 @@ startstone \
 
 echo "::endgroup::"
 
-echo "Listing GemStone services"
+echo "::group::Active GemStone services"
 gslist -cvl
+echo "::endgroup::"
 
 echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 
-echo "Loading the code in the image"
+echo "::group::Loading code"
 
 if [ -z "${INPUT_LOAD_SPEC}" ]; then
   /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}"
@@ -38,12 +39,15 @@ else
   /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" "${INPUT_LOAD_SPEC}"
 fi
 
+echo "::endgroup::"
+
 if [ "${INPUT_RUN_TESTS}" = "true" ]; then
-  echo "Running the test suite"
+  echo "::group::Running the test suite"
   /opt/gemstone/run-tests.sh "${INPUT_PROJECT_NAME}"
+  echo "::endgroup::"
 fi
 
-echo "Stopping services"
+echo "::group::Stopping services"
 
 stopnetldi
 
@@ -54,5 +58,6 @@ stopstone \
   DataCurator \
   "${DATA_CURATOR_PASSWORD}"
 
+echo "::endgroup::"
 
 exit 0
