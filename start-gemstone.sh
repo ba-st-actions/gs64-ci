@@ -32,6 +32,8 @@ echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 
 ls -la "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
+ls -la "${GITHUB_WORKSPACE}"
+ls -la "${RUNNER_WORKSPACE}"
 
 echo "::group::Loading code"
 
