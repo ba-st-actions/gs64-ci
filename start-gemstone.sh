@@ -28,11 +28,13 @@ echo "::group::Active GemStone services"
 gslist -cvl
 echo "::endgroup::"
 
+echo "::group::Mapping workspace"
+
 echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
+ls -lL"${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 
-ls "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
-ls -la "${GITHUB_WORKSPACE}"
+echo "::endgroup::"
 
 echo "::group::Loading code"
 
