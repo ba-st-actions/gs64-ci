@@ -25,6 +25,10 @@ startstone \
 echo "Listing GemStone services"
 gslist -cvl
 
+env | grep INPUT
+echo "${INPUT_PROJECT-NAME}"
+echo "${INPUT_LOAD-SPEC}"
+
 echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT-NAME}"
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT-NAME}"
 
