@@ -32,7 +32,7 @@ echo "::group::Mapping workspace"
 
 echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
-ls -lL"${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
+ls -lL "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 
 echo "::endgroup::"
 
