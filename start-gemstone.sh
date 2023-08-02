@@ -2,7 +2,8 @@
 
 set -e
 
-# Start GemStone services
+echo "Starting GemStone services"
+
 # shellcheck disable=SC2086
 startnetldi \
   -g \
@@ -21,26 +22,23 @@ startstone \
   ${STONE_ARGS:-} \
   ${STONE_SERVICE_NAME}
 
-# list GemStone servers
+echo "Listing GemStone services"
 gslist -cvl
 
-# Load the code
+echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT-NAME}"
+ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT-NAME}"
 
-env
+echo "Loading the code in the image"
 
-ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT_NAME}"
-
-if [ -z "${INPUT_LOAD_SPEC}" ]; then
-  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}"
+if [ -z "${INPUT_LOAD-SPEC}" ]; then
+  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT-NAME}"
 else
-  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" "${INPUT_LOAD_SPEC}"
+  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT-NAME}" "${INPUT_LOAD-SPEC}"
 fi
 
-# Run the test suite if configured
-
 if [ "${INPUT_RUN-TESTS}" == "true" ]; then
-  # Run the test suite
-  /opt/gemstone/run-tests.sh "${INPUT_PROJECT_NAME}"
+  echo "Running the test suite"
+  /opt/gemstone/run-tests.sh "${INPUT_PROJECT-NAME}"
 fi
 
 exit 0
