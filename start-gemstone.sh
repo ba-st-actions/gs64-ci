@@ -34,7 +34,7 @@ ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 echo "::group::Loading code"
 
 if [ -z "${INPUT_LOAD_SPEC}" ]; then
-  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}"
+  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" || echo "::error::Loading failed" && exit 1
 else
   /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" "${INPUT_LOAD_SPEC}"
 fi
