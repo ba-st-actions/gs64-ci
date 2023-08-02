@@ -10,7 +10,6 @@ printLoadingErrorAndExit(){
 
 printTestingErrorAndExit(){
   echo "::error::Some tests has failed"
-  cat "${GEMSTONE_LOG_DIR}/installing-stdout-support.log"
   cat "${GEMSTONE_LOG_DIR}/running-tests.log"
   exit 1
 }
