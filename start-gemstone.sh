@@ -26,6 +26,8 @@ gslist -cvl
 
 # Load the code
 
+env
+
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT_NAME}"
 
 if [ -z "${INPUT_LOAD_SPEC}" ]; then

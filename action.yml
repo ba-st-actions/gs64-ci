@@ -18,4 +18,4 @@ runs:
     - ${{ inputs.project-name }}
     - ${{ inputs.load-spec }}
     - ${{ inputs.run-tests }}
-  post-entrypoint: 'cleanup.sh'
+  post-entrypoint: '/cleanup.sh'
