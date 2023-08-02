@@ -1,0 +1,20 @@
+name: 'GS64 CI'
+description: 'Load code and run tests for GS64'
+inputs:
+  project-name:
+    description: 'Name of the project under test'
+    required: true
+  load-spec:
+    description: 'Name of the load spec to use'
+    required: false
+  run-tests:
+    description: 'If missing or false the action will only load the code'
+    required: false
+    default: "false"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.project-name }}
+    - ${{ inputs.load-spec }}
+    - ${{ inputs.run-tests }}
