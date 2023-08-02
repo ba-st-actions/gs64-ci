@@ -2,6 +2,12 @@
 
 set -e
 
+printLoadingErrorAndExit(){
+  echo "::error::Loading failed"
+  tail "${GEMSTONE_LOG_DIR}/loading-rowan-projects.log"
+  exit 1
+}
+
 echo "::group::Starting GemStone services"
 
 # shellcheck disable=SC2086
@@ -39,9 +45,9 @@ echo "::endgroup::"
 echo "::group::Loading code"
 
 if [ -z "${INPUT_LOAD_SPEC}" ]; then
-  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" || echo "::error::Loading failed" && tail "${GEMSTONE_LOG_DIR}/loading-rowan-projects.log" && exit 1
+  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" || printLoadingErrorAndExit
 else
-  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" "${INPUT_LOAD_SPEC}" || echo "::error::Loading failed" && tail "${GEMSTONE_LOG_DIR}/loading-rowan-projects.log" && exit 1
+  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" "${INPUT_LOAD_SPEC}" || printLoadingErrorAndExit
 fi
 
 echo "::endgroup::"
