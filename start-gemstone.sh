@@ -25,15 +25,14 @@ startstone \
 gslist -cvl
 
 # Load the code
-export GS64_CI_PROJECT_NAME="${INPUT_PROJECT_NAME}"
-
-if [ -n "${INPUT_LOAD_SPEC}" ]; then
-  export GS64_CI_SPEC="${INPUT_LOAD_SPEC}"
-fi
 
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/${GS64_CI_PROJECT_NAME}"
 
-/opt/gemstone/load-rowan-project.sh 
+if [ -z "${INPUT_LOAD_SPEC}" ]; then
+  GS64_CI_PROJECT_NAME="${INPUT_PROJECT_NAME}" /opt/gemstone/load-rowan-project.sh 
+else
+  GS64_CI_SPEC="${INPUT_LOAD_SPEC}" GS64_CI_PROJECT_NAME="${INPUT_PROJECT_NAME}" /opt/gemstone/load-rowan-project.sh 
+fi
 
 # Run the test suite if configured
 
