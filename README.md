@@ -4,6 +4,9 @@
 
 A docker-based GitHub action to load and test code in a GemStone/S 64 image.
 
+This is a community project not endorsed by [GemTalk](https://gemtalksystems.com),
+using the unofficial docker images available [here](https://github.com/ba-st/Docker-GemStone-64).
+
 ## Quick start
 
 Create a workflow file in your project on `.github/worfklows` using this action.
@@ -27,6 +30,11 @@ jobs:
           project_name: 'Currency-API'
           run_tests: 'true'
 ```
+
+When running, the workflow will map the `{GITHUB_WORKSPACE}` directory of the
+runner to `{ROWAN_PROJECTS_HOME}/{project_name}` inside the container running GS.
+So the repository contents previously checked out are available in the directory
+expected by rowan.
 
 ## Supported inputs
 
