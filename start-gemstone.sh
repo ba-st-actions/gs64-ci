@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Starting GemStone services"
+echo "::group::Starting GemStone services"
 
 # shellcheck disable=SC2086
 startnetldi \
@@ -21,6 +21,8 @@ startstone \
   -l "${GEMSTONE_LOG_DIR}/${STONE_SERVICE_NAME}.log" \
   ${STONE_ARGS:-} \
   ${STONE_SERVICE_NAME}
+
+echo "::endgroup::"
 
 echo "Listing GemStone services"
 gslist -cvl
