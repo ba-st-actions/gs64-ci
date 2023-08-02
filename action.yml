@@ -1,13 +1,13 @@
 name: 'GS64 CI'
 description: 'Load code and run tests for GS64'
 inputs:
-  project-name:
+  project_name:
     description: 'Name of the project under test'
     required: true
-  load-spec:
+  load_spec:
     description: 'Name of the load spec to use'
     required: false
-  run-tests:
+  run_tests:
     description: 'If missing or false the action will only load the code'
     required: false
     default: "false"
@@ -15,7 +15,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.project-name }}
-    - ${{ inputs.load-spec }}
-    - ${{ inputs.run-tests }}
-  post-entrypoint: '/cleanup.sh'
+    - ${{ inputs.project_name }}
+    - ${{ inputs.load_spec }}
+    - ${{ inputs.run_tests }}

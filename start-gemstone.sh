@@ -25,24 +25,32 @@ startstone \
 echo "Listing GemStone services"
 gslist -cvl
 
-env | grep INPUT
-echo "${INPUT_PROJECT-NAME}"
-echo "${INPUT_LOAD-SPEC}"
-
-echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT-NAME}"
-ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/${INPUT_PROJECT-NAME}"
+echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
+ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 
 echo "Loading the code in the image"
 
-if [ -z "${INPUT_LOAD-SPEC}" ]; then
-  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT-NAME}"
+if [ -z "${INPUT_LOAD_SPEC}" ]; then
+  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}"
 else
-  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT-NAME}" "${INPUT_LOAD-SPEC}"
+  /opt/gemstone/load-rowan-project.sh "${INPUT_PROJECT_NAME}" "${INPUT_LOAD_SPEC}"
 fi
 
-if [ "${INPUT_RUN-TESTS}" == "true" ]; then
+if [ "${INPUT_RUN_TESTS}" = "true" ]; then
   echo "Running the test suite"
-  /opt/gemstone/run-tests.sh "${INPUT_PROJECT-NAME}"
+  /opt/gemstone/run-tests.sh "${INPUT_PROJECT_NAME}"
 fi
+
+echo "Stopping services"
+
+stopnetldi
+
+stopstone \
+  -i \
+  -t "${STOPSTONE_TIMEOUT_SECONDS}" \
+  "$STONE_SERVICE_NAME" \
+  DataCurator \
+  "${DATA_CURATOR_PASSWORD}"
+
 
 exit 0
