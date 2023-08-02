@@ -8,6 +8,12 @@ printLoadingErrorAndExit(){
   exit 1
 }
 
+printTestingErrorAndExit(){
+  echo "::error::Some tests has failed"
+  cat "${GEMSTONE_LOG_DIR}/running-tests.log"
+  exit 1
+}
+
 echo "::group::Starting GemStone services"
 
 # shellcheck disable=SC2086
@@ -54,7 +60,8 @@ echo "::endgroup::"
 
 if [ "${INPUT_RUN_TESTS}" = "true" ]; then
   echo "::group::Running the test suite"
-  /opt/gemstone/run-tests.sh "${INPUT_PROJECT_NAME}"
+  /opt/gemstone/run-tests.sh "${INPUT_PROJECT_NAME}" || printTestingErrorAndExit
+  cat "${GEMSTONE_LOG_DIR}/running-tests.log"
   echo "::endgroup::"
 fi
 
