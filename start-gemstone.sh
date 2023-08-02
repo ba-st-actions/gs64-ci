@@ -31,6 +31,8 @@ if [ -n "${INPUT_LOAD_SPEC}" ]; then
   export GS64_CI_SPEC="${INPUT_LOAD_SPEC}"
 fi
 
+ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/${GS64_CI_PROJECT_NAME}"
+
 /opt/gemstone/load-rowan-project.sh 
 
 # Run the test suite if configured
