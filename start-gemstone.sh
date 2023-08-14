@@ -36,7 +36,7 @@ startstone \
 
 echo "::endgroup::"
 
-echo "::group::Active GemStone services"
+echo "::group::Listing active GemStone services"
 gslist -cvl
 echo "::endgroup::"
 
