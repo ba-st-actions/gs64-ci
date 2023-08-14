@@ -45,6 +45,7 @@ echo "::group::Mapping workspace"
 echo "Mapping workspace to ${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 ln -s "${GEMSTONE_GLOBAL_DIR}/StdOutPrinter.gs" "${GITHUB_WORKSPACE}/StdOutPrinter.gs"
+ln -s "${GEMSTONE_GLOBAL_DIR}/StdOutTestReporter.gs" "${GITHUB_WORKSPACE}/StdOutTestReporter.gs"
 ls -lL "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 
 echo "::endgroup::"
