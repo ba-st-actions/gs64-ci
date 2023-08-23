@@ -76,7 +76,7 @@ stopnetldi
 
 stopstone \
   -i \
-  -t "${STOPSTONE_TIMEOUT_SECONDS}" \
+  -t "${GS64_STOPSTONE_TIMEOUT_SECONDS}" \
   "$STONE_SERVICE_NAME" \
   DataCurator \
   "${GS64_DATA_CURATOR_PASSWORD}"
