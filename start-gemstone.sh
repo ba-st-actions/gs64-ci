@@ -47,7 +47,10 @@ ln -s "${GITHUB_WORKSPACE}" "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
 ln -s "${GEMSTONE_GLOBAL_DIR}/StdOutPrinter.gs" "${GITHUB_WORKSPACE}/StdOutPrinter.gs"
 ln -s "${GEMSTONE_GLOBAL_DIR}/StdOutTestReporter.gs" "${GITHUB_WORKSPACE}/StdOutTestReporter.gs"
 ls -lL "${ROWAN_PROJECTS_HOME}/$INPUT_PROJECT_NAME"
+echo "::endgroup::"
 
+echo "::group::Configuring GemStone repository"
+/opt/gemstone/configure.sh
 echo "::endgroup::"
 
 echo "::group::Loading code"
@@ -76,7 +79,7 @@ stopstone \
   -t "${STOPSTONE_TIMEOUT_SECONDS}" \
   "$STONE_SERVICE_NAME" \
   DataCurator \
-  "${DATA_CURATOR_PASSWORD}"
+  "${GS64_DATA_CURATOR_PASSWORD}"
 
 echo "::endgroup::"
 
