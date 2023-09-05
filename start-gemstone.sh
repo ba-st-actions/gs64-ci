@@ -14,6 +14,10 @@ printTestingErrorAndExit(){
   exit 1
 }
 
+echo "::group::Configuring GemStone services"
+echo "GEM_TEMPOBJ_CACHE_SIZE = 500000KB;" >> "${GEMSTONE_SYS_CONF}/system.conf"
+echo "::endgroup::"
+
 echo "::group::Starting GemStone services"
 
 # shellcheck disable=SC2086
