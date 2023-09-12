@@ -1,6 +1,7 @@
 # GemStone/S 64 CI
 
 [![GS64-3.6.6](https://img.shields.io/badge/GS64-3.6.6-informational)](https://gemtalksystems.com/products/gs64/)
+[![GS64-3.7.0](https://img.shields.io/badge/GS64-3.7.0-informational)](https://gemtalksystems.com/products/gs64/)
 
 A docker-based GitHub action to load and test code in a GemStone/S 64 image.
 
@@ -25,11 +26,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Load code and run tests
-        uses: ba-st-actions/gs64-ci@v1
+        uses: ba-st-actions/gs64-ci@v2
         with:
           project_name: 'Currency-API'
           run_tests: 'true'
 ```
+
+- `v1` supports GS64 3.6.6
+- `v2` supports GS64 3.7.0
 
 When running, the workflow will map the `{GITHUB_WORKSPACE}` directory of the
 runner to `{ROWAN_PROJECTS_HOME}/{project_name}` inside the container running GS.
