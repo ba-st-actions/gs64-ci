@@ -1,4 +1,4 @@
-FROM ghcr.io/ba-st/gs64-rowan:v3.6.6
+FROM ghcr.io/ba-st/gs64-rowan:v3.7.0
 
 COPY start-gemstone.sh /opt/gemstone/start-gemstone.sh
 
