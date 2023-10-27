@@ -1,5 +1,7 @@
 name: 'GS64 CI'
 description: 'Load code and run tests for GS64'
+icon: check-square
+color: green
 inputs:
   project_name:
     description: 'Name of the project under test'
