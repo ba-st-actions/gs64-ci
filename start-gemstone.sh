@@ -16,6 +16,8 @@ printTestingErrorAndExit(){
 
 echo "::group::Configuring GemStone services"
 echo "GEM_TEMPOBJ_CACHE_SIZE = 500000KB;" >> "${GEMSTONE_SYS_CONF}/system.conf"
+# Workaroung for bug in the native code generator for GS 3.7.0
+echo "GEM_NATIVE_CODE_ENABLED = 0;" >> "${GEMSTONE_SYS_CONF}/system.conf"
 echo "::endgroup::"
 
 echo "::group::Starting GemStone services"
