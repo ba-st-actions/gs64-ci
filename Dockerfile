@@ -9,6 +9,8 @@ RUN  apt-get update \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && setcap cap_sys_resource=pe $GEMSTONE/sys/stoned \
   && setcap cap_sys_resource=pe $GEMSTONE/sys/pgsvrmain \
+  && setcap -r $GEMSTONE/sys/stoned \
+  && setcap -r $GEMSTONE/sys/pgsvrmain \
   ;
 
 ENTRYPOINT [ "/opt/gemstone/entrypoint.sh" ]
