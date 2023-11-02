@@ -1,7 +1,14 @@
 FROM ghcr.io/ba-st/gs64-rowan:v3.7.0
 
 COPY start-gemstone.sh /opt/gemstone/start-gemstone.sh
-RUN setcap cap_sys_resource=pe -r $GEMSTONE/sys/stoned
-RUN setcap cap_sys_resource=pe -r $GEMSTONE/sys/pgsvrmain
+
+RUN  apt-get update \
+  && apt-get install --assume-yes --no-install-recommends \
+     libcap2-bin \
+  && apt-get clean \
+  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+  && setcap cap_sys_resource=pe $GEMSTONE/sys/stoned \
+  && setcap cap_sys_resource=pe $GEMSTONE/sys/pgsvrmain \
+  ;
 
 ENTRYPOINT [ "/opt/gemstone/entrypoint.sh" ]
