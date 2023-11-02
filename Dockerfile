@@ -7,9 +7,9 @@ RUN  apt-get update \
      libcap2-bin \
   && apt-get clean \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-#  && setcap cap_sys_resource=pe $GEMSTONE/sys/stoned \
-#  && setcap cap_sys_resource=pe $GEMSTONE/sys/pgsvrmain \
-#  && setcap -r $GEMSTONE/sys/stoned \
+  && setcap cap_sys_resource=pe $GEMSTONE/sys/stoned \
+  && setcap cap_sys_resource=pe $GEMSTONE/sys/pgsvrmain \
+  && setcap -r $GEMSTONE/sys/stoned \
   && setcap -r $GEMSTONE/sys/pgsvrmain \
   ;
 
