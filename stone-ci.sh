@@ -15,6 +15,15 @@ printTestingErrorAndExit(){
 }
 
 echo "::group::Configuring GemStone services"
+# Copy default system config if missing
+if [ ! -f "${GEMSTONE_SYS_CONF}/system.conf" ]; then
+  cp -p "${GEMSTONE}/data/system.conf" "${GEMSTONE_SYS_CONF}/system.conf"
+fi
+
+# Create (empty) stone config if missing
+if [ ! -f "${GEMSTONE_EXE_CONF}/${STONE_SERVICE_NAME}.conf" ]; then
+  touch "${GEMSTONE_EXE_CONF}/${STONE_SERVICE_NAME}.conf"
+fi
 echo "GEM_TEMPOBJ_CACHE_SIZE = 500000KB;" >> "${GEMSTONE_SYS_CONF}/system.conf"
 # Workaroung for bug in the native code generator for GS 3.7.0
 echo "GEM_NATIVE_CODE_ENABLED = 0;" >> "${GEMSTONE_SYS_CONF}/system.conf"

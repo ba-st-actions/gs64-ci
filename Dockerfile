@@ -1,7 +1,8 @@
-FROM ghcr.io/ba-st/gs64-rowan:v3.7.0
+FROM ghcr.io/ba-st/gs64-rowan:non_root_image
 
-COPY start-gemstone.sh /opt/gemstone/start-gemstone.sh
+COPY stone-ci.sh /opt/gemstone/stone-ci.sh
 
+USER root
 RUN  apt-get update \
   && apt-get install --assume-yes --no-install-recommends \
      libcap2-bin \
@@ -13,4 +14,6 @@ RUN  apt-get update \
   && setcap -r $GEMSTONE/sys/pgsvrmain \
   ;
 
-ENTRYPOINT [ "/opt/gemstone/entrypoint.sh" ]
+USER ${GS_USER}
+
+ENTRYPOINT [ "/opt/gemstone/stone-ci.sh" ]
