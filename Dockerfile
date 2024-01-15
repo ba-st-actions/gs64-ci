@@ -1,4 +1,4 @@
-FROM ghcr.io/ba-st/gs64-rowan:non_root_image
+FROM ghcr.io/ba-st/gs64-rowan:v3.7.0
 
 COPY stone-ci.sh /opt/gemstone/stone-ci.sh
 
